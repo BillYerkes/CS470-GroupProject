@@ -1,0 +1,95 @@
+﻿@model PaginatedList<Canoe.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<h2>Users</h2>
+
+<form asp-controller="ManageUsers"
+       asp-action="List"
+       asp-route-pageNumber="@(Model.PageIndex)" method="get">
+    <p>
+        User ID: <input type="text" name="searchString">
+        <input type="submit" value="Filter" />
+    </p>
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Invalid Login Attempts
+            </th>
+            <th>
+                Email Confirmed
+            </th>
+
+            <th>
+                Lockout Enabled
+            </th>
+            <th>
+                Lockout End Date
+            </th>
+            <th>
+                Two Factor Authentication Enabled
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccessFailedCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LockoutEnd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
+                </td>
+                <td>
+                    <a asp-action="EditUser" asp-route-id="@item.Id">Edit User</a>
+                </td>
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+
+<a asp-controller="ManageUsers"
+   asp-action="List"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-controller="ManageUsers"
+   asp-action="List"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

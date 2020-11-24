@@ -1,0 +1,41 @@
+﻿
+<h2>Rarity</h2>
+
+@model PaginatedList<Canoe.Models.Rarity>
+
+@{
+    ViewData["Title"] = "Rarity";
+}
+
+<form action="@Url.Action("RarityCreate")" method="post">
+    <input type="hidden" name="v_strAction" value="Prep">
+    <button name="v_intPageNumber" value="@(Model.PageIndex)" type="submit" class="btn btn-link">Add Card Rarity</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">Rarity Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <form action="@Url.Action("RarityEdit")" method="post">
+                        <input type="hidden" name="v_strAction" value="Prep">
+                        <input type="hidden" name="v_intPageNumber" value="@(Model.PageIndex)">
+                        <button name="v_intID" value="@item.ID" type="submit" class="btn btn-link">Edit</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

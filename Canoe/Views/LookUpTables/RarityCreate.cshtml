@@ -1,0 +1,32 @@
+﻿@model Canoe.Models.RarityEdit
+
+@{
+
+}
+
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Edit Rarity Name</h2>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label asp-for="Name" class="col-sm-2 col-form-lable"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Name" name="v_strName" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="card-footer">
+            <input type="hidden" name="v_strAction" value="Update">
+            <input type="hidden" name="v_intID" value="@Model.ID">
+            <input type="hidden" name="v_strName" value="@Model.Name">
+            <input type="hidden" name="v_intPageNumber" value="@Model.pageNumber">
+            <button formaction="RarityCreate" type="submit" class="btn btn-primary">Save</button>
+            <button formaction="RarityList" type="submit" class="btn btn-primary">Cancel</button>
+        </div>
+    </div>
+</form>

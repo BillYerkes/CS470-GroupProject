@@ -1,0 +1,47 @@
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\bin\Debug\netcoreapp2.0\Canoe.deps.json
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfig.json
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfig.dev.json
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\bin\Debug\netcoreapp2.0\Canoe.dll
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\bin\Debug\netcoreapp2.0\Canoe.pdb
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\obj\Debug\netcoreapp2.0\Canoe.csproj.CoreCompileInputs.cache
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfoInputs.cache
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfo.cs
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\obj\Debug\netcoreapp2.0\Canoe.dll
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\obj\Debug\netcoreapp2.0\Canoe.pdb
+C:\Users\Bill\Documents\CSC451\Canoe3\Canoe\Canoe\obj\Debug\netcoreapp2.0\Canoe.csprojAssemblyReference.cache
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\appsettings.Development.json
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\appsettings.json
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\bundleconfig.json
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\Properties\launchSettings.json
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\Canoe.deps.json
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfig.json
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfig.dev.json
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\Canoe.dll
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\bin\Debug\netcoreapp2.0\Canoe.pdb
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.csprojAssemblyReference.cache
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfoInputs.cache
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfo.cs
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.dll
+C:\Users\mega-\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.pdb
+D:\BackUP\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.csprojAssemblyReference.cache
+D:\BackUP\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\BackUP\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfoInputs.cache
+D:\BackUP\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfo.cs
+D:\BackUP\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.dll
+D:\BackUP\Documents\GitHub\semester-group-assignment-group-9\Canoe\obj\Debug\netcoreapp2.0\Canoe.pdb
+D:\UMKC\CSC470\Magic\New folder\Canoe\obj\Debug\netcoreapp2.0\Canoe.csprojAssemblyReference.cache
+D:\UMKC\CSC470\Magic\New folder\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfoInputs.cache
+D:\UMKC\CSC470\Magic\New folder\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfo.cs
+D:\UMKC\CSC470\Magic\New folder\Canoe\obj\Debug\netcoreapp2.0\Canoe.dll
+D:\UMKC\CSC470\Magic\New folder\Canoe\obj\Debug\netcoreapp2.0\Canoe.pdb
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\appsettings.Development.json
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\appsettings.json
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\bundleconfig.json
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Properties\launchSettings.json
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Canoe.deps.json
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfig.json
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfig.dev.json
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Canoe.dll
+D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Canoe.pdb
+D:\UMKC\CSC470\Magic\New folder\Canoe\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
