@@ -1,0 +1,213 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddServiceMovie`(
+    IN MovieCD BigInt, ServiceCD BigInt)
+begin
+    INSERT INTO `cs470group_project`.`movieservices`
+        (`MovieCD`,`ServiceCD`)
+    VALUES
+       (MovieCD,ServiceCD);
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetCardList`(
+    )
+BEGIN
+SELECT card.ID, card.Name, card.CommanderCapable, rarity.name as rarity
+    FROM card
+    join rarity on card.RarityCD = rarity.ID
+    Order by card.Name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetCardView`(
+		IN CardID Int
+    )
+BEGIN
+SELECT *, " " as Colors, " " as Tribes, " " as Classes
+    FROM card
+    WHERE
+      card.ID = CardID;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetClasses`(
+    )
+BEGIN
+SELECT *
+    FROM classes
+    Order by classes.Name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetColors`(
+    )
+BEGIN
+SELECT *
+    FROM colors
+    Order by colors.Name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetDeckFormats`(
+    )
+BEGIN
+SELECT *
+    FROM deckformats
+    Order by deckformats.Name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetMatchTypes`(
+    )
+BEGIN
+SELECT *
+    FROM matchtypes
+    Order by matchtypes.Name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetRarities`(
+    )
+BEGIN
+SELECT *
+    FROM rarity
+    Order by rarity.Name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetSeries`(
+    )
+BEGIN
+SELECT *
+    FROM series
+    Order by series.Description;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetServiceDetails`(
+    IN ServiceCD BigInt(20)
+)
+BEGIN
+SELECT 'NETWORK' AS Type, networkservices.ID AS ID, networkservices.ServiceCD AS ServiceCD, networks.Description AS Description, '' AS Seasons 
+    FROM `networkservices`, `networks`
+    WHERE `networks`.`ID` = `networkservices`.`NetworkCD`
+    And  networkservices.ServiceCD = ServiceCD
+UNION ALL        
+SELECT 'MOVIE' AS Type, movieservices.ID AS ID, movieservices.ServiceCD AS ServiceCD, movies.Description AS Description, '' AS Seasons 
+    FROM `movieservices`, `movies`
+    WHERE `movies`.`ID` = `movieservices`.`MovieCD`
+    And  movieservices.ServiceCD = ServiceCD
+UNION ALL    
+SELECT 'SERIES' AS Type, serieserviceseasons.ID AS ID, serieserviceseasons.ServiceCD as ServiceCD, series.Description AS Description, serieserviceseasons.Description AS Seasons 
+    FROM `series`, `serieserviceseasons`
+    WHERE `series`.`ID` = `serieserviceseasons`.`SerieCD` 
+    And  serieserviceseasons.ServiceCD = ServiceCD;     
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetServiceMovies`(
+    IN ServiceCD BigInt
+)
+BEGIN
+SELECT movieservices.ID AS ID, movies.ID AS MovieCD, movieservices.ServiceCD AS ServiceCD, movies.Description AS Description, 0 as Rating
+    FROM `movieservices`, `movies`
+    WHERE `movies`.`ID` = `movieservices`.`MovieCD`
+    And  movieservices.ServiceCD = ServiceCD
+    Order by movies.Description;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetServiceMoviesFavorites`(
+    IN ServiceCD BigInt, IN UserCD BigInt
+)
+BEGIN
+SELECT movieservices.ID AS ID, movies.ID AS MovieCD, movieservices.ServiceCD AS ServiceCD, movies.Description  AS Description, userfavoritemovies.Rating AS Rating
+    FROM
+    movies INNER JOIN movieservices ON (movies.ID = movieservices.MovieCD and movieservices.ServiceCD = ServiceCD)
+    LEFT JOIN
+    userfavoritemovies ON (movies.ID = userfavoritemovies.MovieCD and userfavoritemovies.UserCD = UserCD)
+    order By  movies.Description;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetSets`(
+    )
+BEGIN
+SELECT *
+    FROM sets
+    Order by sets.Name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTribes`(
+    )
+BEGIN
+SELECT *
+    FROM tribes
+    Order by tribes.Name;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertFailedLoginAttempt`(
+    IN IPAddress varchar(500), UserID varchar(500))
+begin
+    INSERT INTO `cs470group_project`.`failedloginattempts`
+        (`IPAddress`,`UserID`)
+    VALUES
+       (IPAddress,UserID);
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RemoveServiceNetwork`(
+    IN NetworkServiceID BigInt)
+begin
+	DELETE FROM `cs470group_project`.`networkservices`
+	 where `ID` = NetworkServiceID;
+
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ServiceMoviesRightJoinMovies`(
+    IN ServiceCD BigInt
+)
+BEGIN
+SELECT movies.ID AS ID, movieservices.ServiceCD AS ServiceCD, movies.Description AS Description, movieservices.ID AS MovieServiceID
+    FROM `movieservices`
+    right Join  `movies`
+    ON
+    `movies`.`ID` = `movieservices`.`MovieCD`
+    And  movieservices.ServiceCD = ServiceCD
+    Order by movies.Description;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ServiceSeriesRightJoinSeries`(
+    IN ServiceCD BigInt
+)
+BEGIN
+SELECT series.ID AS ID, serieserviceseasons.ServiceCD AS ServiceCD, series.Description AS Description, serieserviceseasons.ID AS SerieServiceID, `serieserviceseasons`.`Description` AS Seasons
+    FROM `serieserviceseasons`
+    right Join  `series`
+    ON
+    `series`.`ID` = `serieserviceseasons`.`SerieCD`
+    And  serieserviceseasons.ServiceCD = ServiceCD
+    Order by series.Description;
+END$$
+DELIMITER ;

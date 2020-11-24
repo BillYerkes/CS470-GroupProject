@@ -1,0 +1,273 @@
+CREATE TABLE `accesslevel` (
+  `AccessLevelID` int NOT NULL,
+  `AccessLevelDescription` varchar(50) NOT NULL,
+  PRIMARY KEY (`AccessLevelID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `aspnetroleclaims` (
+  `Id` int NOT NULL,
+  `ClaimType` longtext,
+  `ClaimValue` longtext,
+  `RoleId` varchar(255) NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `IX_AspNetRoleClaims_RoleId` (`RoleId`),
+  CONSTRAINT `FK_AspNetRoleClaims_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `aspnetroles` (
+  `Id` varchar(255) NOT NULL,
+  `ConcurrencyStamp` longtext,
+  `Name` varchar(256) DEFAULT NULL,
+  `NormalizedName` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `RoleNameIndex` (`NormalizedName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `aspnetuserclaims` (
+  `Id` int NOT NULL,
+  `ClaimType` longtext,
+  `ClaimValue` longtext,
+  `UserId` varchar(255) NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `IX_AspNetUserClaims_UserId` (`UserId`),
+  CONSTRAINT `FK_AspNetUserClaims_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `aspnetuserlogins` (
+  `LoginProvider` varchar(255) NOT NULL,
+  `ProviderKey` varchar(255) NOT NULL,
+  `ProviderDisplayName` longtext,
+  `UserId` varchar(255) NOT NULL,
+  PRIMARY KEY (`LoginProvider`,`ProviderKey`),
+  KEY `IX_AspNetUserLogins_UserId` (`UserId`),
+  CONSTRAINT `FK_AspNetUserLogins_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `aspnetuserroles` (
+  `UserId` varchar(255) NOT NULL,
+  `RoleId` varchar(255) NOT NULL,
+  PRIMARY KEY (`UserId`,`RoleId`),
+  KEY `IX_AspNetUserRoles_RoleId` (`RoleId`),
+  KEY `IX_AspNetUserRoles_UserId` (`UserId`),
+  CONSTRAINT `FK_AspNetUserRoles_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_AspNetUserRoles_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `aspnetusers` (
+  `UserID` bigint NOT NULL AUTO_INCREMENT,
+  `Id` varchar(255) NOT NULL,
+  `AccessFailedCount` int NOT NULL,
+  `ConcurrencyStamp` longtext,
+  `Email` varchar(256) DEFAULT NULL,
+  `EmailConfirmed` bit(1) NOT NULL,
+  `LockoutEnabled` bit(1) NOT NULL,
+  `LockoutEnd` datetime(6) DEFAULT NULL,
+  `NormalizedEmail` varchar(256) DEFAULT NULL,
+  `NormalizedUserName` varchar(256) DEFAULT NULL,
+  `PasswordHash` longtext,
+  `PhoneNumber` longtext,
+  `PhoneNumberConfirmed` bit(1) NOT NULL,
+  `SecurityStamp` longtext,
+  `TwoFactorEnabled` bit(1) NOT NULL,
+  `UserName` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `UserIDIndex` (`UserID`),
+  UNIQUE KEY `UserNameIndex` (`NormalizedUserName`),
+  KEY `EmailIndex` (`NormalizedEmail`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `aspnetusertokens` (
+  `UserId` varchar(255) NOT NULL,
+  `LoginProvider` varchar(255) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Value` longtext,
+  PRIMARY KEY (`UserId`,`LoginProvider`,`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `card` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(250) NOT NULL,
+  `ConvertedManaCost` double DEFAULT NULL,
+  `CommanderCapable` tinyint unsigned NOT NULL,
+  `Power` varchar(50) DEFAULT NULL,
+  `Toughness` varchar(50) DEFAULT NULL,
+  `RarityCD` int unsigned NOT NULL,
+  `ManaCost` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=21153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardclasses` (
+  `CardClassesID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `ClassCD` int unsigned NOT NULL,
+  PRIMARY KEY (`CardClassesID`),
+  UNIQUE KEY `CardClassesID_UNIQUE` (`CardCD`,`ClassCD`)
+) ENGINE=InnoDB AUTO_INCREMENT=22027 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardcolors` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `ColorCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `CardColorsID_UNIQUE` (`CardCD`,`ColorCD`)
+) ENGINE=InnoDB AUTO_INCREMENT=22815 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardsets` (
+  `CardSetID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `SetCD` int unsigned NOT NULL,
+  PRIMARY KEY (`CardSetID`),
+  UNIQUE KEY `CardSetID_UNIQUE` (`CardSetID`)
+) ENGINE=InnoDB AUTO_INCREMENT=49918 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardstory` (
+  `CardCD` int unsigned NOT NULL,
+  `Abilities` longtext,
+  `BackStory` longtext,
+  PRIMARY KEY (`CardCD`),
+  CONSTRAINT `CardStory_Card_FK` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardtribes` (
+  `CardTribeID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `TribeCD` int unsigned NOT NULL,
+  PRIMARY KEY (`CardTribeID`),
+  UNIQUE KEY `CardTribeID_UNIQUE` (`CardCD`,`TribeCD`)
+) ENGINE=InnoDB AUTO_INCREMENT=19451 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `classes` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `ClassID_UNIQUE` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `collection` (
+  `CollectionID` int unsigned NOT NULL AUTO_INCREMENT,
+  `PlayerCD` int NOT NULL,
+  `CardCD` int NOT NULL,
+  PRIMARY KEY (`CollectionID`),
+  UNIQUE KEY `Collection` (`PlayerCD`,`CardCD`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `colors` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ColorID_UNIQUE` (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `deck` (
+  `DeckID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  `DeckFormatCD` int unsigned NOT NULL,
+  `CommanderCD` int unsigned NOT NULL,
+  `CollectionCD` int unsigned NOT NULL,
+  PRIMARY KEY (`DeckID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `deckformats` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Format_UNIQUE` (`Name`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `guild` (
+  `GuildID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  `LeaderCD` int unsigned NOT NULL,
+  PRIMARY KEY (`GuildID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `LeaderCD_UNIQUE` (`LeaderCD`),
+  KEY `Guild_Player_FK_idx` (`LeaderCD`),
+  CONSTRAINT `Guild_Player_FK` FOREIGN KEY (`LeaderCD`) REFERENCES `player` (`PlayerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `match` (
+  `MatchID` int unsigned NOT NULL AUTO_INCREMENT,
+  `PlayedDateTime` datetime DEFAULT NULL,
+  `MatchTypeCD` int unsigned NOT NULL,
+  `WinnerCD` int unsigned NOT NULL,
+  PRIMARY KEY (`MatchID`),
+  KEY `Match_MatchType_FK_idx` (`MatchTypeCD`),
+  KEY `Match_Winner_FK_idx` (`WinnerCD`,`MatchID`),
+  CONSTRAINT `Match_MatchType_FK` FOREIGN KEY (`MatchTypeCD`) REFERENCES `matchtypes` (`ID`),
+  CONSTRAINT `Match_Winner_FK` FOREIGN KEY (`WinnerCD`, `MatchID`) REFERENCES `matchplayer` (`PlayerCD`, `MatchCD`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `matchplayer` (
+  `MatchCD` int unsigned NOT NULL,
+  `PlayerCD` int unsigned NOT NULL,
+  PRIMARY KEY (`MatchCD`,`PlayerCD`),
+  KEY `MatchPlayer_Player_FK_idx` (`PlayerCD`),
+  CONSTRAINT `MatchPlayer_Match_FK` FOREIGN KEY (`MatchCD`) REFERENCES `match` (`MatchID`),
+  CONSTRAINT `MatchPlayer_Player_FK` FOREIGN KEY (`PlayerCD`) REFERENCES `player` (`PlayerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `matchtypes` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `player` (
+  `PlayerID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  `DateOfBirth` date DEFAULT NULL,
+  `GuildCD` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`PlayerID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  KEY `Player_Guild_FK_idx` (`GuildCD`),
+  CONSTRAINT `Player_Guild_FK` FOREIGN KEY (`GuildCD`) REFERENCES `guild` (`GuildID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `rarity` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `RarityID_UNIQUE` (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `sets` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `SetID_UNIQUE` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `tribes` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `CardTribeID_UNIQUE` (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `users` (
+  `ID` bigint NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  `UserID` varchar(50) NOT NULL,
+  `EmailAddress` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL,
+  `Locked` bit(1) NOT NULL DEFAULT b'0',
+  `InvalidLogInAttempts` int NOT NULL DEFAULT '0',
+  `LastDateTimeLoggedIn` datetime DEFAULT NULL,
+  `Confirmed` bit(1) NOT NULL DEFAULT b'0',
+  `AccessLevelCD` int DEFAULT NULL,
+  `Deleted` bit(1) NOT NULL DEFAULT b'0',
+  `Admin` bit(1) NOT NULL,
+  `Anonymous` bit(1) NOT NULL,
+  `LoggedUser` bit(1) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
