@@ -51,18 +51,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<Classes> l_rsClasses;
+                IQueryable<Classes> l_rsClasses;
 
-                    l_rsClasses = from m in _context.classes.FromSql("Call GetClasses()") select m;
+                l_rsClasses = from m in _context.classes.FromSql("Call GetClasses()") select m;
 
-                    return View(await PaginatedList<Classes>.CreateAsync(l_rsClasses, v_intPageNumber, m_intPageSize));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
+                return View(await PaginatedList<Classes>.CreateAsync(l_rsClasses, v_intPageNumber, m_intPageSize));
             }
             catch (Exception ex)
             {
@@ -84,18 +77,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<Colors> l_rsColors;
+                IQueryable<Colors> l_rsColors;
 
-                    l_rsColors = from m in _context.colors.FromSql("Call GetColors()") select m;
+                l_rsColors = from m in _context.colors.FromSql("Call GetColors()") select m;
 
-                    return View(await PaginatedList<Colors>.CreateAsync(l_rsColors, v_intPageNumber, m_intPageSize));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
+                return View(await PaginatedList<Colors>.CreateAsync(l_rsColors, v_intPageNumber, m_intPageSize));
             }
             catch (Exception ex)
             {
@@ -115,18 +101,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<DeckFormats> l_rsDeckFormats;
+                IQueryable<DeckFormats> l_rsDeckFormats;
 
-                    l_rsDeckFormats = from m in _context.deckformats.FromSql("Call GetDeckFormats()") select m;
+                l_rsDeckFormats = from m in _context.deckformats.FromSql("Call GetDeckFormats()") select m;
 
-                    return View(await PaginatedList<DeckFormats>.CreateAsync(l_rsDeckFormats, v_intPageNumber, m_intPageSize));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
+                return View(await PaginatedList<DeckFormats>.CreateAsync(l_rsDeckFormats, v_intPageNumber, m_intPageSize));
             }
             catch (Exception ex)
             {
@@ -146,18 +125,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<MatchTypes> l_rsMatchTypes;
+                IQueryable<MatchTypes> l_rsMatchTypes;
 
-                    l_rsMatchTypes = from m in _context.matchtypes.FromSql("Call GetMatchTypes()") select m;
+                l_rsMatchTypes = from m in _context.matchtypes.FromSql("Call GetMatchTypes()") select m;
 
-                    return View(await PaginatedList<MatchTypes>.CreateAsync(l_rsMatchTypes, v_intPageNumber, m_intPageSize));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
+                return View(await PaginatedList<MatchTypes>.CreateAsync(l_rsMatchTypes, v_intPageNumber, m_intPageSize));
             }
             catch (Exception ex)
             {
@@ -177,18 +149,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<Rarity> l_rsRarity;
+                IQueryable<Rarity> l_rsRarity;
 
-                    l_rsRarity = from m in _context.rarity.FromSql("Call GetRarities()") select m;
+                l_rsRarity = from m in _context.rarity.FromSql("Call GetRarities()") select m;
 
-                    return View(await PaginatedList<Rarity>.CreateAsync(l_rsRarity, v_intPageNumber, m_intPageSize));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
+                return View(await PaginatedList<Rarity>.CreateAsync(l_rsRarity, v_intPageNumber, m_intPageSize));
             }
             catch (Exception ex)
             {
@@ -381,18 +346,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<Tribes> l_rsTribes;
+                IQueryable<Tribes> l_rsTribes;
 
-                    l_rsTribes = from m in _context.tribes.FromSql("Call GetTribes()") select m;
+                l_rsTribes = from m in _context.tribes.FromSql("Call GetTribes()") select m;
 
-                    return View(await PaginatedList<Tribes>.CreateAsync(l_rsTribes, v_intPageNumber, m_intPageSize));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
+                return View(await PaginatedList<Tribes>.CreateAsync(l_rsTribes, v_intPageNumber, m_intPageSize));
             }
             catch (Exception ex)
             {

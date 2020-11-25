@@ -82,6 +82,33 @@ namespace Canoe.Models
         public int pageNumber { get; set; }
     }
 
+    public class Player
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+       
+        public DateTime? DateOfBirth { get; set; }
+        public int? GuildCD { get; set; }
+    }
+
+    public class PlayerEdit
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public int GuildCD { get; set; }
+        public int pageNumber { get; set; }
+    }
+
+    public class PlayerCollection
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public Boolean CommanderCapable { get; set; }
+        public string Rarity { get; set; }
+        public int CardCD { get; set; }
+        public int? PlayerCD { get; set; }
+    }
 
     public class Rarity
     {

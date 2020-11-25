@@ -51,18 +51,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<Cards> l_rsCardList;
+                IQueryable<Cards> l_rsCardList;
 
-                    l_rsCardList = from m in _context.GetCardLists.FromSql("Call GetCardList()") select m;
+                l_rsCardList = from m in _context.GetCardList.FromSql("Call GetCardList()") select m;
 
-                    return View(await PaginatedList<Cards>.CreateAsync(l_rsCardList, v_intPageNumber, m_intPageSize));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
+                return View(await PaginatedList<Cards>.CreateAsync(l_rsCardList, v_intPageNumber, m_intPageSize));
             }
             catch (Exception ex)
             {
@@ -87,7 +80,7 @@ namespace Canoe.Controllers
                 {// user needs to be logged in
                     IQueryable<Cards> l_rsCardList;
 
-                    l_rsCardList = from m in _context.GetCardLists.FromSql("Call GetSetCardList({0})", v_intSetID) select m;
+                    l_rsCardList = from m in _context.GetCardList.FromSql("Call GetSetCardList({0})", v_intSetID) select m;
 
                     return View(await PaginatedList<Cards>.CreateAsync(l_rsCardList, v_intPageNumber, m_intPageSize, v_intSetID));
                 }
@@ -145,18 +138,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<Sets> l_rsSets;
+                IQueryable<Sets> l_rsSets;
 
-                    l_rsSets = from m in _context.sets.FromSql("Call GetSets()") select m;
+                l_rsSets = from m in _context.sets.FromSql("Call GetSets()") select m;
 
-                    return View(await PaginatedList<Sets>.CreateAsync(l_rsSets, v_intPageNumber, m_intPageSize));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
+                return View(await PaginatedList<Sets>.CreateAsync(l_rsSets, v_intPageNumber, m_intPageSize));
             }
             catch (Exception ex)
             {

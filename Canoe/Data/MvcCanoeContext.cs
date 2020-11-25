@@ -14,9 +14,11 @@ namespace Canoe.Data
             : base(options)
         {
         }
-
+        
+        public DbSet<PlayerCollection> GetPlayerCollection { get; set; }
+        public DbSet<Player> GetPlayerList { get; set; }
         public DbSet<Cards> GetSetCardList { get; set; }
-        public DbSet<Cards> GetCardLists { get; set; }
+        public DbSet<Cards> GetCardList { get; set; }
         public DbSet<CardView> GetCardViews { get; set; }
         public DbSet<Classes> classes { get; set; }
         public DbSet<Colors> colors { get; set; }

@@ -45,3 +45,18 @@ D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfi
 D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Canoe.dll
 D:\UMKC\CSC470\Magic\New folder\Canoe\bin\Debug\netcoreapp2.0\Canoe.pdb
 D:\UMKC\CSC470\Magic\New folder\Canoe\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\appsettings.Development.json
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\appsettings.json
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\bundleconfig.json
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\Properties\launchSettings.json
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\Canoe.deps.json
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfig.json
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\Canoe.runtimeconfig.dev.json
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\Canoe.dll
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\bin\Debug\netcoreapp2.0\Canoe.pdb
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\obj\Debug\netcoreapp2.0\Canoe.csprojAssemblyReference.cache
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfoInputs.cache
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\obj\Debug\netcoreapp2.0\Canoe.AssemblyInfo.cs
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\obj\Debug\netcoreapp2.0\Canoe.dll
+D:\UMKC\CSC470\Magic\Magic\CS470-GroupProject\Canoe\obj\Debug\netcoreapp2.0\Canoe.pdb

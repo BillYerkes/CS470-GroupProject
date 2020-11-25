@@ -13822,11 +13822,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\UMKC\\CSC470\\Magic\\New folder\\Canoe\\Canoe.csproj",
+      "projectUniqueName": "D:\\UMKC\\CSC470\\Magic\\Magic\\CS470-GroupProject\\Canoe\\Canoe.csproj",
       "projectName": "Canoe",
-      "projectPath": "D:\\UMKC\\CSC470\\Magic\\New folder\\Canoe\\Canoe.csproj",
+      "projectPath": "D:\\UMKC\\CSC470\\Magic\\Magic\\CS470-GroupProject\\Canoe\\Canoe.csproj",
       "packagesPath": "C:\\Users\\yer13\\.nuget\\packages\\",
-      "outputPath": "D:\\UMKC\\CSC470\\Magic\\New folder\\Canoe\\obj\\",
+      "outputPath": "D:\\UMKC\\CSC470\\Magic\\Magic\\CS470-GroupProject\\Canoe\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
