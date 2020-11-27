@@ -47,15 +47,20 @@ namespace Canoe.Controllers
         // int v_intPageNumber = 1              Used for pagination
         //**********************************************************************************************************
 
-        public async Task<IActionResult> CardList(int v_intPageNumber = 1)
+        public async Task<IActionResult> CardList(string v_strFilter = "", int v_intPageNumber = 1)
         {
             try
             {
                 IQueryable<Cards> l_rsCardList;
+                if (v_strFilter == null)
+                    v_strFilter = "";
 
-                l_rsCardList = from m in _context.GetCardList.FromSql("Call GetCardList()") select m;
+                if (v_strFilter == "" ) 
+                    l_rsCardList = from m in _context.GetCardList.FromSql("Call GetCardList()") select m;
+                else
+                    l_rsCardList = from m in _context.GetCardList.FromSql("Call GetCardListFiltered({0})", v_strFilter) select m;
 
-                return View(await PaginatedList<Cards>.CreateAsync(l_rsCardList, v_intPageNumber, m_intPageSize));
+                return View(await PaginatedList<Cards>.CreateAsync(l_rsCardList, v_intPageNumber, m_intPageSize, v_strFilter));
             }
             catch (Exception ex)
             {
@@ -76,18 +81,11 @@ namespace Canoe.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
                     IQueryable<Cards> l_rsCardList;
 
                     l_rsCardList = from m in _context.GetCardList.FromSql("Call GetSetCardList({0})", v_intSetID) select m;
 
                     return View(await PaginatedList<Cards>.CreateAsync(l_rsCardList, v_intPageNumber, m_intPageSize, v_intSetID));
-                }
-                else
-                { //should not get here but just in case
-                    return NotFound();
-                }
             }
             catch (Exception ex)
             {
@@ -103,22 +101,55 @@ namespace Canoe.Controllers
         // int v_intPageNumber = 1              Used for pagination
         //**********************************************************************************************************
 
-        public async Task<IActionResult> CardDetail(int v_intPageNumber = 1)
+        public async Task<IActionResult> CardDetail(int v_intCardID, int v_intPageNumber = 1)
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {// user needs to be logged in
-                    IQueryable<CardView> l_rsCardView;
+                IQueryable<CardViewComplete> l_rsCardView;
 
-                    l_rsCardView = from m in _context.GetCardViews.FromSql("Call GetCardView({0})", 6) select m;
-                    
-                    return View(await PaginatedList<CardView>.CreateAsync(l_rsCardView, v_intPageNumber, m_intPageSize));
+                l_rsCardView = from m in _context.GetCardViews.FromSql("Call GetCardView({0})", v_intCardID) select m;
+
+                IQueryable<Classes> l_rsClasses;
+                IQueryable<Colors> l_rsColors;
+                IQueryable<Tribes> l_rsTribes;
+
+                string l_strClasses;
+                string l_strColors;
+                string l_strTribes;
+
+                l_rsClasses = from m in _context.classes.FromSql("Call GetCardClasses({0})", v_intCardID) select m;
+                l_rsColors = from m in _context.colors.FromSql("Call GetCardColors({0})", v_intCardID) select m;
+                l_rsTribes = from m in _context.tribes.FromSql("Call GetCardTribes({0})", v_intCardID) select m;
+
+                l_strClasses = "";
+                l_strColors = "";
+                l_strTribes = "";
+
+                foreach (var c in l_rsClasses)
+                {
+                    l_strClasses = l_strClasses + c.Name + " ";
                 }
-                else
-                { //should not get here but just in case
-                    return NotFound();
+
+                foreach (var c in l_rsColors)
+                {
+                    l_strColors = l_strColors + c.Name + " ";
                 }
+
+                foreach (var c in l_rsTribes)
+                {
+                    l_strTribes = l_strTribes + c.Name + " ";
+                }
+
+                foreach (var v in l_rsCardView)
+                {
+                    v.Classes = l_strClasses;
+                    v.Colors = l_strColors;
+                    v.Tribes = l_strTribes;
+                }
+
+
+                return View(await PaginatedList<CardViewComplete>.CreateAsync(l_rsCardView, 1, 1));
+
             }
             catch (Exception ex)
             {

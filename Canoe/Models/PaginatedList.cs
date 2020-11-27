@@ -59,6 +59,7 @@ namespace Canoe.Models
         }
 
 
+
         public bool HasPreviousPage
         {
             get

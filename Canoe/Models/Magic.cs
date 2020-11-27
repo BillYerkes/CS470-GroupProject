@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 namespace Canoe.Models
 {
 
+    public class AccessLevel
+    {
+        public int AccessLevelID { get; set; }
+        public string AccessLevelDescription { get; set; }
+    }
+
     public class Cards
     {
         public int ID { get; set; }
@@ -22,7 +28,21 @@ namespace Canoe.Models
         public Boolean CommanderCapable { get; set; }
         public string Power { get; set; }
         public string Toughness { get; set; }
+        public int RarityCD { get; set; }
+        public string Rarity { get; set; }
         public string ManaCost { get; set; }
+
+    }
+    public class CardViewComplete
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public double ConvertedManaCost { get; set; }
+        public Boolean CommanderCapable { get; set; }
+        public string Power { get; set; }
+        public string Toughness { get; set; }
+        public string ManaCost { get; set; }
+        public string Rarity { get; set; }
         public string Tribes { get; set; }
         public string Classes { get; set; }
         public string Colors { get; set; }
@@ -57,6 +77,15 @@ namespace Canoe.Models
         public int pageNumber { get; set; }
     }
 
+    public class PlayerDeck
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Format { get; set; }
+        public string Commander { get; set; }
+        public int PlayerCD { get; set; }
+
+    }
     public class DeckFormats
     {
         public int ID { get; set; }
@@ -108,6 +137,7 @@ namespace Canoe.Models
         public string Rarity { get; set; }
         public int CardCD { get; set; }
         public int? PlayerCD { get; set; }
+        public string Deck { get; set; }
     }
 
     public class Rarity

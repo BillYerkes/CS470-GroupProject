@@ -1,37 +1,52 @@
 ﻿
-<h2>Sets</h2>
+<h2>Cards</h2>
 
 @model PaginatedList<Canoe.Models.Cards>
 
 @{
     ViewData["Title"] = "Cards";
 }
+@if ((@Model.SearchString != "") )
+{
+<h3>Cards with @Model.SearchString  in the name</h3>
+}
 
-<form action="@Url.Action("SetCreate")" method="post">
-    <input type="hidden" name="v_strAction" value="Prep">
-    <button name="v_intPageNumber" value="@(Model.PageIndex)" type="submit" class="btn btn-link">Add Card</button>
+<form action="@Url.Action("CardList")" method="post">
+    <input name="v_strFilter">
+    <button name="v_intPageNumber" value="1" type="submit" class="btn btn-link">Filter</button>
 </form>
 
 <table class="table">
     <thead>
         <tr>
-            <th class="text-center">Class Name</th>
+            <th class="text-left" width="400">Name</th>
+            <th class="text-center">Commander</th>
+            <th class="text-left">Rarity</th>
+            <th class="text-center">Details</th>
         </tr>
+
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommanderCapable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rarity)
-            </td>
-        </tr>
+            <tr>
+                <td width="400">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td  align="center">
+                    @Html.DisplayFor(modelItem => item.CommanderCapable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rarity)
+                </td>
+                <td align="center">
+                    <form action="@Url.Action("CardDetail")" method="post">
+                        <input type="hidden" name="v_intPageNumber" value="@(Model.PageIndex)">
+                        <button name="v_intCardID" value="@item.ID" type="submit" class="btn btn-link">Details</button>
+                    </form>
+                </td>
+
+            </tr>
         }
     </tbody>
 </table>
@@ -42,6 +57,7 @@
     @if (Model.HasPreviousPage)
     {
         <button type="submit" name="v_intPageNumber" value="@(Model.PageIndex -1)" class="btn btn-default">Previous</button>
+        <input type="hidden" name="v_strFilter" value="@Model.SearchString">
     }
     else
     {
@@ -50,6 +66,7 @@
     @if (Model.HasNextPage)
     {
         <button type="submit" Use name="v_intPageNumber" value="@(Model.PageIndex +1)" class="btn btn-default">Next</button>
+        <input type="hidden" name="v_strFilter" value="@Model.SearchString">
     }
     else
     {

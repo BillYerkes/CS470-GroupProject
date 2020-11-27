@@ -89,5 +89,30 @@ namespace Canoe.Controllers
             }
         }
 
+        //**********************************************************************************************************
+        // RarityList     List of All Rarities
+        //
+        // Inputs:   
+        // int v_intPageNumber = 1              Used for pagination
+        //**********************************************************************************************************
+
+        public async Task<IActionResult> PlayerDeckList(int v_intPlayerID, int v_intPageNumber = 1)
+        {
+            try
+            {
+                IQueryable<PlayerCollection> l_rsPlayerCollectionList;
+
+                l_rsPlayerCollectionList = from m in _context.GetPlayerCollection.FromSql("Call GetPlayerCollection({0})", v_intPlayerID) select m;
+
+                return View(await PaginatedList<PlayerCollection>.CreateAsync(l_rsPlayerCollectionList, v_intPageNumber, m_intPageSize, v_intPlayerID));
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
     }
 }

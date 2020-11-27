@@ -15,11 +15,12 @@ namespace Canoe.Data
         {
         }
         
+        public DbSet<PlayerDeck> GetPlayerDecks { get; set; }
         public DbSet<PlayerCollection> GetPlayerCollection { get; set; }
         public DbSet<Player> GetPlayerList { get; set; }
         public DbSet<Cards> GetSetCardList { get; set; }
         public DbSet<Cards> GetCardList { get; set; }
-        public DbSet<CardView> GetCardViews { get; set; }
+        public DbSet<CardViewComplete> GetCardViews { get; set; }
         public DbSet<Classes> classes { get; set; }
         public DbSet<Colors> colors { get; set; }
         public DbSet<MatchTypes> matchtypes { get; set; }
