@@ -125,16 +125,6 @@ CREATE TABLE `cardstory` (
   CONSTRAINT `CardStory_Card_FK` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `cardtribes` (
-  `ID` int unsigned NOT NULL AUTO_INCREMENT,
-  `CardCD` int unsigned NOT NULL,
-  `TribeCD` int unsigned NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `CardTribeID_UNIQUE` (`CardCD`,`TribeCD`),
-  KEY `cardtribestribes_idx` (`TribeCD`),
-  CONSTRAINT `cardtribescard` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`),
-  CONSTRAINT `cardtribestribes` FOREIGN KEY (`TribeCD`) REFERENCES `tribes` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19451 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `player` (
   `ID` int unsigned NOT NULL AUTO_INCREMENT,
