@@ -1,0 +1,242 @@
+CREATE TABLE `classes` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `ClassID_UNIQUE` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `colors` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ColorID_UNIQUE` (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `deckformats` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Format_UNIQUE` (`Name`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `matchtypes` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `rarity` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `RarityID_UNIQUE` (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `tribes` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `CardTribeID_UNIQUE` (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `sets` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `SetID_UNIQUE` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `card` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(250) NOT NULL,
+  `ConvertedManaCost` double DEFAULT NULL,
+  `CommanderCapable` tinyint unsigned NOT NULL,
+  `Power` varchar(50) DEFAULT NULL,
+  `Toughness` varchar(50) DEFAULT NULL,
+  `RarityCD` int unsigned NOT NULL,
+  `ManaCost` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  KEY `CardRarity_idx` (`RarityCD`),
+  CONSTRAINT `CardRarity` FOREIGN KEY (`RarityCD`) REFERENCES `rarity` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=21153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardclasses` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `ClassCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `CardClassesID_UNIQUE` (`CardCD`,`ClassCD`),
+  KEY `CardClassClass_idx` (`ClassCD`),
+  CONSTRAINT `cardclassescard` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`),
+  CONSTRAINT `cardclassesclasses` FOREIGN KEY (`ClassCD`) REFERENCES `classes` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=22027 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardcolors` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `ColorCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `CardColorsID_UNIQUE` (`CardCD`,`ColorCD`),
+  KEY `cardcolorscolors_idx` (`ColorCD`),
+  CONSTRAINT `cardcolorscard` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`),
+  CONSTRAINT `cardcolorscolors` FOREIGN KEY (`ColorCD`) REFERENCES `colors` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=22815 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardtribes` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `TribeCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `CardTribeID_UNIQUE` (`CardCD`,`TribeCD`),
+  KEY `cardtribestribes_idx` (`TribeCD`),
+  CONSTRAINT `cardtribescard` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`),
+  CONSTRAINT `cardtribestribes` FOREIGN KEY (`TribeCD`) REFERENCES `tribes` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=19451 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `cardsets` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `SetCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `CardSetID_UNIQUE` (`ID`),
+  KEY `cardsetscard_idx` (`CardCD`),
+  KEY `cardsetssets_idx` (`SetCD`),
+  CONSTRAINT `cardsetscard` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`),
+  CONSTRAINT `cardsetssets` FOREIGN KEY (`SetCD`) REFERENCES `sets` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=49918 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardstory` (
+  `CardCD` int unsigned NOT NULL,
+  `Abilities` longtext,
+  `BackStory` longtext,
+  PRIMARY KEY (`CardCD`),
+  CONSTRAINT `CardStory_Card_FK` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cardtribes` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `CardCD` int unsigned NOT NULL,
+  `TribeCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `CardTribeID_UNIQUE` (`CardCD`,`TribeCD`),
+  KEY `cardtribestribes_idx` (`TribeCD`),
+  CONSTRAINT `cardtribescard` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`),
+  CONSTRAINT `cardtribestribes` FOREIGN KEY (`TribeCD`) REFERENCES `tribes` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=19451 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `player` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  `DateOfBirth` date DEFAULT NULL,
+  `GuildCD` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `PlayerID_UNIQUE` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `guild` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  `LeaderCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  UNIQUE KEY `LeaderCD_UNIQUE` (`LeaderCD`),
+  KEY `Guild_Player_FK_idx` (`LeaderCD`),
+  CONSTRAINT `Guild_Player_FK` FOREIGN KEY (`LeaderCD`) REFERENCES `player` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+ALTER TABLE `cs470group_project`.`player` 
+ADD INDEX `playerguild_idx` (`GuildCD` ASC) VISIBLE;
+;
+ALTER TABLE `cs470group_project`.`player` 
+ADD CONSTRAINT `playerguild`
+  FOREIGN KEY (`GuildCD`)
+  REFERENCES `cs470group_project`.`guild` (`ID`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+
+
+
+CREATE TABLE `deck` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  `DeckFormatCD` int unsigned NOT NULL,
+  `CommanderCD` int unsigned DEFAULT NULL,
+  `PlayerCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`),
+  KEY `deckdeckformat_idx` (`DeckFormatCD`),
+  KEY `deckcard_idx` (`CommanderCD`),
+  KEY `deckplayer_idx` (`PlayerCD`),
+  CONSTRAINT `deckcard` FOREIGN KEY (`CommanderCD`) REFERENCES `card` (`ID`),
+  CONSTRAINT `deckdeckformat` FOREIGN KEY (`DeckFormatCD`) REFERENCES `deckformats` (`ID`),
+  CONSTRAINT `deckplayer` FOREIGN KEY (`PlayerCD`) REFERENCES `player` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `collection` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `PlayerCD` int unsigned NOT NULL,
+  `CardCD` int unsigned NOT NULL,
+  `DeckCD` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Collection` (`PlayerCD`,`CardCD`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  KEY `collectioncard_idx` (`CardCD`),
+  KEY `collectiondeck_idx` (`DeckCD`),
+  CONSTRAINT `collectioncard` FOREIGN KEY (`CardCD`) REFERENCES `card` (`ID`),
+  CONSTRAINT `collectiondeck` FOREIGN KEY (`DeckCD`) REFERENCES `deck` (`ID`),
+  CONSTRAINT `collectionplayer` FOREIGN KEY (`PlayerCD`) REFERENCES `player` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `matchplayer` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `PlayerCD` int unsigned NOT NULL,
+  `MatchCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`PlayerCD`,`MatchCD`),
+  KEY `matchplayerplayer_idx` (`PlayerCD`),
+  CONSTRAINT `matchplayerplayer` FOREIGN KEY (`PlayerCD`) REFERENCES `player` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `matches` (
+  `ID` int unsigned NOT NULL AUTO_INCREMENT,
+  `PlayedDateTime` datetime DEFAULT NULL,
+  `MatchTypeCD` int unsigned NOT NULL,
+  `WinnerCD` int unsigned NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `Match_MatchType_FK_idx` (`MatchTypeCD`),
+  KEY `Match_Winner_FK_idx` (`WinnerCD`,`ID`),
+  CONSTRAINT `Match_MatchType_FK` FOREIGN KEY (`MatchTypeCD`) REFERENCES `matchtypes` (`ID`),
+  CONSTRAINT `Match_Winner_FK` FOREIGN KEY (`WinnerCD`, `ID`) REFERENCES `matchplayer` (`PlayerCD`, `MatchCD`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+ALTER TABLE `cs470group_project`.`matchplayer` 
+ADD INDEX `matchplayermatch_idx` (`MatchCD` ASC) VISIBLE;
+;
+ALTER TABLE `cs470group_project`.`matchplayer` 
+ADD CONSTRAINT `matchplayermatch`
+  FOREIGN KEY (`MatchCD`)
+  REFERENCES `cs470group_project`.`matches` (`ID`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
