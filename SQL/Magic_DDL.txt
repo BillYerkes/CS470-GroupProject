@@ -149,13 +149,13 @@ CREATE TABLE `guild` (
   CONSTRAINT `Guild_Player_FK` FOREIGN KEY (`LeaderCD`) REFERENCES `player` (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-ALTER TABLE `cs470group_project`.`player` 
+ALTER TABLE `player` 
 ADD INDEX `playerguild_idx` (`GuildCD` ASC) VISIBLE;
 ;
-ALTER TABLE `cs470group_project`.`player` 
+ALTER TABLE `player` 
 ADD CONSTRAINT `playerguild`
   FOREIGN KEY (`GuildCD`)
-  REFERENCES `cs470group_project`.`guild` (`ID`)
+  REFERENCES `guild` (`ID`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
@@ -220,13 +220,12 @@ CREATE TABLE `matches` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-ALTER TABLE `cs470group_project`.`matchplayer` 
+ALTER TABLE `matchplayer` 
 ADD INDEX `matchplayermatch_idx` (`MatchCD` ASC) VISIBLE;
 ;
-ALTER TABLE `cs470group_project`.`matchplayer` 
+ALTER TABLE `matchplayer` 
 ADD CONSTRAINT `matchplayermatch`
   FOREIGN KEY (`MatchCD`)
-  REFERENCES `cs470group_project`.`matches` (`ID`)
+  REFERENCES `matches` (`ID`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
-
