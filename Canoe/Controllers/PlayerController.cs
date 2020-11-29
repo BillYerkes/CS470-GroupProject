@@ -41,6 +41,30 @@ namespace Canoe.Controllers
         }
 
         //**********************************************************************************************************
+        // GuildList     List of All Guilds
+        //
+        // Inputs:   
+        // int v_intPageNumber = 1              Used for pagination
+        //**********************************************************************************************************
+
+        public async Task<IActionResult> GuildList(int v_intPageNumber = 1)
+        {
+            try
+            {
+                IQueryable<Guild> l_rsGuildList;
+
+                l_rsGuildList = from m in _context.guild.FromSql("Call GetGuildList()") select m;
+
+                return View(await PaginatedList<Guild>.CreateAsync(l_rsGuildList, v_intPageNumber, m_intPageSize));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        //**********************************************************************************************************
         // RarityList     List of All Rarities
         //
         // Inputs:   

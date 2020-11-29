@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace Canoe.Models
 {
-
+    public class Guild
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int LeaderCD { get; set; }
+    }
     public class AccessLevel
     {
         public int AccessLevelID { get; set; }

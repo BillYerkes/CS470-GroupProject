@@ -14,7 +14,7 @@ namespace Canoe.Data
             : base(options)
         {
         }
-        
+        public DbSet<Guild> guild{ get; set; }
         public DbSet<PlayerDeck> GetPlayerDecks { get; set; }
         public DbSet<PlayerCollection> GetPlayerCollection { get; set; }
         public DbSet<Player> GetPlayerList { get; set; }

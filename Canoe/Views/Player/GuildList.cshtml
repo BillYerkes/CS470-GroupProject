@@ -1,21 +1,17 @@
 ﻿
-<h2>Sets</h2>
+<h2>Guilds</h2>
 
-@model PaginatedList<Canoe.Models.Player>
+@model PaginatedList<Canoe.Models.Guild>
 
 @{
-    ViewData["Title"] = "Players";
+    ViewData["Title"] = "Guilds";
 }
 
-<form action="@Url.Action("PlayerCreate")" method="post">
-    <input type="hidden" name="v_strAction" value="Prep">
-    <button name="v_intPageNumber" value="@(Model.PageIndex)" type="submit" class="btn btn-link">Add Player</button>
-</form>
 
 <table class="table">
     <thead>
         <tr>
-            <th class="text-center">Class Name</th>
+            <th class="text-center">Guild Name</th>
         </tr>
     </thead>
     <tbody>
@@ -26,16 +22,12 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
+                @Html.DisplayFor(modelItem => item.LeaderCD)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GuildCD)
-                
-            </td>
-            <td>
-                <form action="@Url.Action("PlayerCollectionList")" method="post">
+                <form action="@Url.Action("Player")" method="post">
                     <input type="hidden" name="v_intPageNumber" value="@(Model.PageIndex)">
-                    <button name="v_intPlayerID" value="@item.ID" type="submit" class="btn btn-link">Collection</button>
+                    <button name="v_intPlayerID" value="@item.ID" type="submit" class="btn btn-link">Players</button>
                 </form>
             </td>
         </tr>
@@ -45,7 +37,7 @@
 
 
 
-<form action="@Url.Action("PlayerList")" method="post">
+<form action="@Url.Action("GuildList")" method="post">
     @if (Model.HasPreviousPage)
     {
         <button type="submit" name="v_intPageNumber" value="@(Model.PageIndex -1)" class="btn btn-default">Previous</button>
