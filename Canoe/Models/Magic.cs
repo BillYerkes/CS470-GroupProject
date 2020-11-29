@@ -12,6 +12,14 @@ namespace Canoe.Models
         public string AccessLevelDescription { get; set; }
     }
 
+    public class Guild
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+
+        public int LeaderCD { get; set; }
+    }
+
     public class Cards
     {
         public int ID { get; set; }
